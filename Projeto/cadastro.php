@@ -1,0 +1,149 @@
+    <?php
+            include 'db_login.php';
+
+            $mysql = mysqli_connect($servername, $username, $password, $dbname);
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $nome = $_POST["nome"];
+                $email = $_POST["email"];
+                $senha = password_hash($_POST["senha"], PASSWORD_DEFAULT); // Criptografando a senha
+            
+                $sql = "INSERT INTO usuarios (nome, email, senha) VALUES ('$nome', '$email', '$senha')";
+                if (mysqli_query($mysql, $sql)) {
+                    echo "Cadastro realizado com sucesso!";
+                } else {
+                    echo "Erro: " . mysqli_error($mysql);
+                }
+            }
+            ?>
+
+            
+    
+    
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: darkblue;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .container {
+                background-color: rgba(0, 0, 0, 0.8);
+                padding: 30px;
+                border-radius: 10px;
+                width: 400px;
+                text-align: center;
+            }
+            .inputBox {
+                position: relative;
+                margin-bottom: 20px;
+            }
+            .inputUser {
+                width: 95%;
+                padding: 10px;
+                background: none;
+                border: none;
+                border-bottom: 1px solid white;
+                color: white;
+                font-size: 15px;
+                outline: none;
+            }
+            .labelInput {
+                position: absolute;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                transition: 0.5s;
+            }
+            .inputUser:focus ~ .labelInput,
+            .inputUser:valid ~ .labelInput {
+                top: -20px;
+                font-size: 12px;
+                color: dodgerblue;
+            }
+            #submit {
+                background-color: dodgerblue;
+                border: none;
+                padding: 10px;
+                width: 100%;
+                border-radius: 5px;
+                color: white;
+                cursor: pointer;
+                font-size: larger;
+            }
+            #submit:hover{
+                background-color: lightblue;
+            }
+            .logar{
+
+            display: inline-block; 
+            padding: 10px ; 
+            background-color: dodgerblue; 
+            color: white; 
+            text-align: center; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            border: none; 
+            cursor: pointer; 
+            font-family: Arial, sans-serif; 
+            font-size: 16px; 
+            transition: background-color 0.3s ease; 
+            }
+
+            .logar:hover {
+            background-color: lightblue; 
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Cadastro</h2>
+        <form action="login.php" method="post">
+            <div class="inputBox">
+                <input type="text" name="nome" id="nome" class="inputUser" required>
+                <label for="nome" class="labelInput">Nome Completo</label>
+            </div>
+            <div class="inputBox">
+                <input type="text" name="email" id="email" class="inputUser" required>
+                <label for="email" class="labelInput">Email</label>
+            </div>
+            <div class="inputBox">
+                <input type="password" name="senha" id="senha" class="inputUser" required>
+                <label for="senha" class="labelInput">Senha</label>
+            </div>
+            <div class="inputBox">
+                <input type="password" name="confirmar_senha" id="confirmar_senha" class="inputUser" required>
+                <label for="confirmar_senha" class="labelInput">Confirme a Senha</label>
+            </div>
+            <input type="submit" id="submit" value="Cadastrar">
+        </form>
+        <hr>
+        
+        <a href="login.php" class="logar">Já estou cadastrado</a>
+    </div>
+
+
+        <script>
+            const form = document.querySelector('form');
+            const senha = document.getElementById('senha');
+            const confirmarSenha = document.getElementById('confirmar_senha');
+
+            form.addEventListener('submit', function(event) {
+                if (senha.value !== confirmarSenha.value) {
+                    alert('As senhas não coincidem. Tente novamente.');
+                    event.preventDefault(); 
+                }
+            });
+        </script>
+    </body>
+    </html>
