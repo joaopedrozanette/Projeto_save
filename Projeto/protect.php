@@ -1,15 +1,9 @@
-    <?php
+<?php
+session_start();
 
-
-    if(!isset($_SESSION)) {
-        session_start();
-        
-    }
-
-    if(!isset($_SESSION['id'])) {
-        die("Você não pode acessar essa página porque não está logado.<p><a href=\"login.php\">Entrar</a></p>");
-    }
-
-
-
-    ?>
+if (!isset($_SESSION['usuario_id'])) {
+    // Se o usuário não estiver logado, redireciona para a página de login
+    header("Location: login.html");
+    exit();
+}
+?>

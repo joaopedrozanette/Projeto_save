@@ -1,5 +1,6 @@
 <?php
 include 'db.php';
+include 'protect.php';
 
 if (isset($_GET["id"])) {
     $codigo_item = $_GET["id"];

@@ -5,10 +5,10 @@ $password = "j10140884";
 $dbname = "usuarios";
 
 
-$mysql = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 
-if ($mysql->connect_error) {
-    die("Conexão falhou: " . $mysql->connect_error);
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
 }
 ?>

@@ -2,6 +2,7 @@
 include 'db.php';
 include 'protect.php';
 
+
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
@@ -19,10 +20,11 @@ $result = $mysql->query($sql);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="index.php">Início</a>
-        <a href="add_item.php">Adicionar Novo Item</a>
-    </div>
+<div class="navbar">
+    <a href="index.php">Início</a>
+    <a href="add_item.php">Adicionar Novo Item</a>
+    <a href="logout.php">Logout</a> <!-- Link para logout -->
+</div>
     <div class="container">
         <h1>Controle de Estoque</h1>
         
@@ -50,7 +52,7 @@ $result = $mysql->query($sql);
                             <td>" . $row["modelo"] . "</td>
                             <td>" . $row["quantidade"] . "</td>
                             <td>
-                                <a href='update_item.php?id=" . $row["codigo_item"] . "'>Editar</a>
+                                <a href='editar.php?id=" . $row["codigo_item"] . "'>Editar</a>
                                 <a href='delete_item.php?id=" . $row["codigo_item"] . "'>Deletar</a>
                             </td>
                           </tr>";
